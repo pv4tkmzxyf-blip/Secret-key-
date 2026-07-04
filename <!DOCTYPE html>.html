@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nick | Portfolio</title>
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-accent: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            --heart-color: #f43f5e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #090d16, #111827, #1e1b4b);
+            background-size: 400% 400%;
+            animation: fluidMovement 20s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-main);
+            padding: 12px;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 1s ease;
+        }
+
+        /* Laptop/Desktop padding adjustment */
+        @media (min-width: 768px) {
+            body {
+                padding: 40px 20px;
+            }
+        }
+
+        body.love-mode {
+            background: linear-gradient(135deg, #1e0b1c, #2d0617, #4c0519);
+            --glass-accent: #f43f5e;
+        }
+
+        @keyframes fluidMovement {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .liquid-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            opacity: 0.3;
+            pointer-events: none;
+            transition: all 1s ease;
+        }
+        .orb-1 {
+            top: -10%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #3b82f6, #06b6d4);
+        }
+        .orb-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #6366f1, #d946ef);
+        }
+
+        @media (min-width: 768px) {
+            .orb-1 { width: 500px; height: 500px; }
+            .orb-2 { width: 600px; height: 600px; }
+        }
+
+        body.love-mode .orb-1 { background: radial-gradient(circle, #f43f5e, #fb7185); }
+        body.love-mode .orb-2 { background: radial-gradient(circle, #db2777, #9d174d); }
+
+        .glass-portfolio {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1050px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px) saturate(140%);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            transition: border-color 1s ease, padding 0.3s ease;
+        }
+
+        /* Laptop View Layout split */
+        @media (min-width: 850px) {
+            .glass-portfolio {
+                grid-template-columns: 1.1fr 1.9fr;
+                padding: 40px;
+                border-radius: 28px;
+                gap: 40px;
+            }
+        }
+
+        body.love-mode .glass-portfolio { border-color: rgba(244, 63, 94, 0.3); }
+
+        .profile-sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @media (min-width: 850px) {
+            .profile-sidebar {
+                border-bottom: none;
+                border-right: 1px solid rgba(255, 255, 255, 0.08);
+                padding-bottom: 0;
+                padding-right: 20px;
+            }
+        }
+
+        .img-container {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05));
+            margin-bottom: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .img-container {
+                width: 180px;
+                height: 180px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .profile-sidebar h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            .profile-sidebar h1 { font-size: 2rem; }
+        }
+
+        .badge-it {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #7dd3fc;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            transition: all 0.5s ease;
+        }
+
+        @media (min-width: 768px) {
+            .badge-it { padding: 6px 16px; font-size: 0.85rem; margin-bottom: 25px; }
+        }
+
+        body.love-mode .badge-it {
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #fda4af;
+        }
+
+        .quick-meta {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 14px;
+            text-align: left;
+        }
+        @media (min-width: 768px) { .quick-meta { padding: 18px; } }
+
+        .quick-meta p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+        @media (min-width: 768px) { .quick-meta p { font-size: 0.9rem; margin-bottom: 10px; } }
+
+        .quick-meta p:last-child { margin-bottom: 0; }
+
+        .quick-meta span {
+            color: var(--text-main);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .interactive-panel { display: flex; flex-direction: column; width: 100%; min-width: 0; }
+
+        /* Mobile Responsive Navigation Bar Setup */
+        .tab-navigation {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 6px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (min-width: 500px) {
+            .tab-navigation {
+                flex-direction: row;
+                gap: 6px;
+            }
+        }
+        @media (min-width: 768px) { .tab-navigation { margin-bottom: 30px; } }
+
+        .tab-btn {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        @media (min-width: 500px) { .tab-btn { flex: 1; } }
+        @media (min-width: 768px) { .tab-btn { padding: 12px 10px; font-size: 0.95rem; } }
+
+        .tab-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.love-mode .tab-btn.active {
+            background: rgba(244, 63, 94, 0.2);
+            border-color: rgba(244, 63, 94, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            animation: glassFadeIn 0.5s ease forwards;
+        }
+
+        .tab-content.active { display: block; }
+
+        @keyframes glassFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            transition: border-color 0.5s ease;
+        }
+
+        @media (min-width: 768px) {
+            .glass-card { padding: 24px; margin-bottom: 20px; border-radius: 18px; }
+        }
+
+        body.love-mode .glass-card { border-color: rgba(244, 63, 94, 0.15); }
+
+        .glass-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            color: var(--glass-accent);
+            transition: color 0.5s ease;
+        }
+        @media (min-width: 768px) { .glass-card h3 { font-size: 1.25rem; margin-bottom: 15px; } }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 16px;
+        }
+        @media (min-width: 768px) { .timeline-item { padding-left: 24px; margin-bottom: 20px; } }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--glass-accent);
+            border-radius: 50%;
+        }
+
+        .showcase-img {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-top: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        @media (min-width: 768px) { .showcase-img { margin-top: 15px; border-radius: 14px; } }
+
+        .secret-heart-btn {
+            background: rgba(244, 63, 94, 0.1);
+            border: 1px dashed rgba(244, 63, 94, 0.4);
+            color: #f43f5e;
+        }
+        .secret-heart-btn:hover {
+            background: rgba(244, 63, 94, 0.2);
+            box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
+        }
+
+        .heart-particle {
+            position: fixed;
+            color: var(--heart-color);
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 10;
+            animation: floatUp 4s linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="liquid-orb orb-1"></div>
+    <div class="liquid-orb orb-2"></div>
+
+    <main class="glass-portfolio">
+        
+        <!-- Sidebar Profile Container -->
+        <section class="profile-sidebar">
+            <div class="img-container">
+                <img src="photo_2026-05-12%2009.02.38.jpeg" alt="Nick Profile">
+            </div>
+            <h1 id="profile-name">Phyo Wai Yan Lin</h1>
+            <div class="badge-it" id="profile-badge">IT Student[cite: 1]</div>
+            
+            <div class="quick-meta">
+                <p>Date of Birth <span>September 12, 2006</span></p>
+                <p style="margin-top: 12px;">Location <span>Yangon, Myanmar</span></p>
+            </div>
+        </section>
+
+        <!-- Right Side Panel Contents -->
+        <section class="interactive-panel">
+            
+            <nav class="tab-navigation">
+                <button class="tab-btn active" onclick="switchTab(event, 'education-tab')">Education</button>
+                <button class="tab-btn" onclick="switchTab(event, 'cv-tab')">CV Details</button>
+                <button class="tab-btn secret-heart-btn" onclick="toggleLoveMode(event)">❤️ Secret Key</button>
+            </nav>
+
+            <div class="content-view">
+                
+                <!-- Tab 1: Educational Background -->
+                <div id="education-tab" class="tab-content active">
+                    <div class="glass-card">
+                        <h3>Education Timeline</h3>
+                        <div class="timeline-item">
+                            <div style="color: var(--glass-accent); font-size:0.85rem; font-weight:bold;">Present</div>
+                            <div style="font-weight:600; margin:2px 0; font-size: 0.95rem;">British United College, Yangon[cite: 1]</div>
+                            <div style="color: var(--text-muted); font-size:0.85rem;">International Foundation Programme[cite: 1]</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div style="color: var(--glass-accent); font-size:0.85rem; font-weight:bold;">2024 - 2025</div>
+                            <div style="font-weight:600; margin:2px 0; font-size: 0.95rem;">Basic Education High School - [Aung Pan][cite: 1]</div>
+                            <div style="color: var(--text-muted); font-size:0.85rem;">Matriculation Exam (Grade 12)[cite: 1]</div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3>Campus Presentation</h3>
+                        <img src="photo_2026-05-26%2019.00.10.jpeg" alt="Academic Presentation" class="showcase-img">
+                    </div>
+                </div>
+
+                <!-- Tab 2: Full CV Information -->
+                <div id="cv-tab" class="tab-content">
+                    <div class="glass-card">
+                        <h3>Professional Profile</h3>
+                        <p style="line-height: 1.6; color: var(--text-muted); font-size: 0.9rem;">
+                            Highly motivated IT student prepared to apply technological frameworks efficiently[cite: 1]. Proven fast learner, responsible, and dedicated to continuous structural improvement[cite: 1].
+                        </p>
+                    </div>
+                    <div class="glass-card">
+                        <h3>Contact Credentials</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; word-break: break-word;">
+                            <strong>Phone:</strong> +959 941111800<br>
+                            <strong>Email:</strong> phyowaiyanlinn607@gmail.com<br>
+                            <strong>Address:</strong> Kawliya Street, South Okkalapa, Yangon[cite: 1]
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Flirting / Secret Love Mode -->
+                <div id="love-tab" class="tab-content">
+                    <div class="glass-card" style="text-align: center; border-color: rgba(244,63,94,0.4);">
+                        <h3 style="color: #f43f5e; font-size: 1.4rem;">Hey Kyi... ❤️</h3>
+                        <p style="line-height: 1.6; color: #ffe4e6; font-size: 1rem; margin-bottom: 20px; font-style: italic;">
+                            "I can learn complex programming languages, fix system code, and handle data tracking grids... but my favorite line of code will always be the one that connects me to you."
+                        </p>
+                        <div style="border-radius: 12px; overflow: hidden; border: 2px solid rgba(244,63,94,0.3); box-shadow: 0 8px 32px rgba(244,63,94,0.2);">
+                            <img src="2026-05-28%2021.19.03.jpg" alt="Nick and Kyi" style="width:100%; display:block; height: auto; max-height: 380px; object-fit: cover;">
+                        </div>
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: #fecdd3; font-weight: 600;">Our favorite moment.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function switchTab(event, tabId) {
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            if(event) event.currentTarget.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function toggleLoveMode(e) {
+            document.body.classList.toggle('love-mode');
+            const badge = document.getElementById('profile-badge');
+            
+            if(document.body.classList.contains('love-mode')) {
+                badge.textContent = "Kyi's Favorite";
+                switchTab(null, 'love-tab');
+                
+                // Fewer particles on mobile screens to protect performance
+                const heartCount = window.innerWidth < 600 ? 8 : 20;
+                for(let i=0; i<heartCount; i++) {
+                    setTimeout(createHeart, i * 150);
+                }
+            } else {
+                badge.textContent = "IT Student";
+                switchTab(null, 'education-tab');
+                const navButtons = document.querySelectorAll('.tab-btn');
+                navButtons[0].classList.add('active');
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 12 + 14) + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+    </script>
+</body>
+</html>
